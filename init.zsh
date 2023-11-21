@@ -5,9 +5,9 @@ bindkey '^[H' run-help
 
 if (( ! ${+HELPDIR} )); then
   local dir
-  for dir (/usr/local/share/zsh/help /usr/share/zsh/$ZSH_VERSION/help /usr/share/zsh/help); do
-    if [[ -d $dir ]]; then
-      typeset -g HELPDIR=$dir
+  for dir in /usr/local/share/zsh/help /usr/share/zsh/$ZSH_VERSION/help /usr/share/zsh/help; do
+    if [[ -d ${dir} ]]; then
+      typeset -g HELPDIR=${dir}
       break
     fi
   done

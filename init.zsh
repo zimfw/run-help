@@ -4,8 +4,14 @@ bindkey '^[h' run-help
 bindkey '^[H' run-help
 
 if (( ! ${+HELPDIR} )); then
-  if [[ -d /usr/share/zsh/help ]] typeset -g HELPDIR=/usr/share/zsh/help
-  if [[ -d /usr/local/share/zsh/help ]] typeset -g HELPDIR=/usr/local/share/zsh/help
+  local dir
+  for dir (/usr/local/share/zsh/help /usr/share/zsh/$ZSH_VERSION/help /usr/share/zsh/help); do
+    if [[ -d $dir ]]; then
+      typeset -g HELPDIR=$dir
+      break
+    fi
+  done
+  unset dir
 fi
 
 local cmd
